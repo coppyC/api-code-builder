@@ -1,0 +1,27 @@
+{
+  "name": "api-code-builder",
+  "version": "0.9.3",
+  "description": "js/ts api code build from swagger",
+  "main": "dist/main.js",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/coppyC/api-code-builder",
+  "author": "coppy",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watch",
+    "build": "yarn build:npm & yarn build:cdn",
+    "build:npm": "webpack --env.mode=development --env.target=node --env.filename=main --env.libraryTarget=commonjs --progress",
+    "build:cdn": "webpack --env.mode=production --env.target=web --env.filename=cdn --env.libraryTarget=window --progress",
+    "upload": "yarn build; npm publish"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "handlebars-jest": "^0.5.0",
+    "handlebars-loader": "^1.7.1",
+    "jest": "^24.7.1",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}

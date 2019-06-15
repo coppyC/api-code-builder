@@ -1,0 +1,22 @@
+{
+  "version": "{{swagger}}",
+  "host": "{{host}}",
+  "basePath": "{{basePath}}",
+  "definitions": {
+    {{#each definitions}}
+    "{{@key}}": {
+      "properties": {
+        {{#each properties}}
+        "{{@key}}": {
+          "key": "{{@key}}",
+          {{#json this filter="label monitors converters length access"}}
+          "{{key}}": {{{value}}},
+          {{/json}}
+          "type": "{{dataType this}}"
+        }{{#nif @last}},{{/nif}}
+        {{/each}}
+      }
+    }{{#nif @last}},{{/nif}}
+    {{/each}}
+  }
+}

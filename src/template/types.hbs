@@ -1,0 +1,22 @@
+{{!
+  interface Definition {
+    title: string
+    type: DataType
+    properties: {
+      [propertiy: string]: {
+        type: DataType
+        items?: Schema
+        format?: 'int64' | 'int32'
+      }
+    }
+  }
+}}
+declare namespace D {
+  {{#each definitions}}
+  interface {{@key}} {
+    {{#each properties}}
+    {{@key}}?: {{dataType this}}
+    {{/each }}
+  }
+  {{/each}}
+}
