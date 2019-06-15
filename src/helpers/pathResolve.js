@@ -3,7 +3,7 @@
  */
 module.exports = function(path) {
   path = path.replace(/\{[^{}]+\}/g, $ => '$' + $)
-  if(/$\{.+\}/.test(path))
+  if(/\$\{.+\}/.test(path))
     return '`' + path + '`'
   else
     return `'${path}'`
