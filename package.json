@@ -1,11 +1,13 @@
 {
   "name": "api-code-builder",
-  "version": "0.9.5",
+  "version": "1.0.2",
   "description": "js/ts api code build from swagger",
   "main": "dist/main.js",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
+  "types": "./index.d.ts",
   "repository": "https://github.com/coppyC/api-code-builder",
   "author": "coppy",
   "license": "MIT",

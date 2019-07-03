@@ -1,5 +1,4 @@
 {
-  "version": "{{swagger}}",
   "host": "{{host}}",
   "basePath": "{{basePath}}",
   "definitions": {
@@ -8,7 +7,6 @@
       "properties": {
         {{#each properties}}
         "{{@key}}": {
-          "key": "{{@key}}",
           {{#json this filter="label monitors converters length access"}}
           "{{key}}": {{{value}}},
           {{/json}}
