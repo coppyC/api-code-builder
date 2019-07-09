@@ -1,6 +1,6 @@
 {
   "name": "api-code-builder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "js/ts api code build from swagger",
   "main": "dist/main.js",
   "files": [
