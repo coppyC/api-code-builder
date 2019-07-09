@@ -7,7 +7,7 @@
       "properties": {
         {{#each properties}}
         "{{@key}}": {
-          {{#json this filter="label monitors converters length access"}}
+          {{#json this filter="label monitor  length access"}}
           "{{key}}": {{{value}}},
           {{/json}}
           "type": "{{dataType this}}"
