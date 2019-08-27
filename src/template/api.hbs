@@ -5,7 +5,7 @@ export default {
   {{#each this as |api method|}}
   {{> comment}}
   {{operationId}}({{params parameters type="definition" version=@root/version}})
-  {{~#if @root/ResponseType}}: {{@root/ResponseType}}{{/if}} {
+  {{~#if @root/ResponseType}}: {{{@root/ResponseType}}}{{/if}} {
     {{> formData}}
     return axios.{{method}}({{{pathResolve path}}}{{params parameters type="use"}})
   }{{#nif @last '&&' @../last}},{{/nif}}

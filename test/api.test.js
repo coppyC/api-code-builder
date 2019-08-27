@@ -62,22 +62,22 @@ const data = {
 }
 
 test('黑盒测试', () => {
-  const tsCode = template({version: 'ts', ResponseType: 'any', ...data})
+  const tsCode = template({version: 'ts', ResponseType: 'Promise<any>', ...data})
   const jsCode = template({version: 'js', ...data})
   const expectTsCode = `
     import axios from 'axios'
 
     export default {
       /** 管理员修改密码 */
-      changePasswordUsingGET(id: string): any {
+      changePasswordUsingGET(id: string): Promise<any> {
         return axios.get('/admin/changePassword', { params: { id } })
       },
       /** 管理员修改密码 */
-      changePasswordUsingPOST(param: D.AdminParam): any {
+      changePasswordUsingPOST(param: D.AdminParam): Promise<any> {
         return axios.post('/admin/changePassword', param)
       },
       /** 管理员获取密码 */
-      getPasswordUsingGET(id: string): any {
+      getPasswordUsingGET(id: string): Promise<any> {
         return axios.get('/admin/getPassword', { params: { id } })
       }
     }
