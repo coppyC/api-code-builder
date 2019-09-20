@@ -1,6 +1,6 @@
 {
   "name": "api-code-builder",
-  "version": "1.0.5",
+  "version": "2.1.2",
   "description": "js/ts api code build from swagger",
   "main": "dist/main.js",
   "files": [
@@ -12,18 +12,15 @@
   "author": "coppy",
   "license": "MIT",
   "scripts": {
-    "test": "jest --watch",
-    "build": "yarn build:npm & yarn build:cdn",
-    "build:npm": "webpack --env.mode=development --env.target=node --env.filename=main --env.libraryTarget=commonjs --progress",
-    "build:cdn": "webpack --env.mode=production --env.target=web --env.filename=cdn --env.libraryTarget=window --progress",
-    "upload": "yarn build; npm publish"
+    "watch": "jest --watch",
+    "prepublishOnly": "rollup -c; rollup -c -o dist/main.umd.js -n codeBuilder -f umd;"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
-    "handlebars-jest": "^0.5.0",
-    "handlebars-loader": "^1.7.1",
     "jest": "^24.7.1",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4"
+    "rollup": "^1.21.4",
+    "rollup-plugin-typescript2": "^0.24.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
   }
 }

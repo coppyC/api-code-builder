@@ -1,3 +1,12 @@
-export function api(config: any): string
-export function types(config: any): string
-export function config(config: any): string
+interface ApiConfig {
+  paths: any
+  version?: 'ts' | 'js'
+  definitions?: any
+  customResponse?: boolean
+  axiosFrom?: string
+}
+
+declare const codeBuilder: {
+  buildApi(config: ApiConfig): string
+}
+export default codeBuilder

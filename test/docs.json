@@ -1,0 +1,1093 @@
+{
+  "swagger": "2.0",
+  "info": {},
+  "host": "xxx",
+  "basePath": "/xxx",
+  "tags": [
+    {
+      "name": "管理员",
+      "description": "Admin Controller"
+    },
+    {
+      "name": "门店",
+      "description": "Shop Controller"
+    }
+  ],
+  "paths": {
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "管理员"
+        ],
+        "summary": "登录",
+        "description": "开发环境初始账号密码：\n        xxxx\n        xxxx\n    ",
+        "operationId": "loginUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "account",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "captcha",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "credentials",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/banShop": {
+      "post": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "封禁/解封门店",
+        "operationId": "banShopUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "shopBanQo",
+            "description": "shopBanQo",
+            "required": true,
+            "schema": {
+              "originalRef": "ShopBanQo",
+              "$ref": "#/definitions/ShopBanQo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/checkShop": {
+      "post": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "审核门店",
+        "operationId": "checkShopUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "shopCheckQo",
+            "description": "shopCheckQo",
+            "required": true,
+            "schema": {
+              "originalRef": "ShopCheckQo",
+              "$ref": "#/definitions/ShopCheckQo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/checkShopUpdate": {
+      "post": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "审核门店资料更新",
+        "operationId": "checkShopUpdateUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "shopUpdateCheckQo",
+            "description": "shopUpdateCheckQo",
+            "required": true,
+            "schema": {
+              "originalRef": "ShopUpdateCheckQo",
+              "$ref": "#/definitions/ShopUpdateCheckQo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/deleteService": {
+      "delete": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "删除服务",
+        "operationId": "deleteServiceUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "serviceId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/deleteServiceCategory": {
+      "delete": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "删除服务分类",
+        "operationId": "deleteServiceCategoryUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "serviceCategoryId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/saveService": {
+      "post": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "设置服务",
+        "operationId": "saveServiceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "serviceQoList",
+            "description": "serviceQoList",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "originalRef": "ServiceQo",
+                "$ref": "#/definitions/ServiceQo"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/saveServiceCategory": {
+      "post": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "设置服务分类",
+        "operationId": "saveServiceCategoryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "serviceCategoryQOList",
+            "description": "serviceCategoryQOList",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "originalRef": "ServiceCategoryQo",
+                "$ref": "#/definitions/ServiceCategoryQo"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/shopList": {
+      "get": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "门店列表(包括审核列表)",
+        "operationId": "checkShopListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "checkStatus",
+            "in": "query",
+            "description": "checkStatus",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "currPage",
+            "in": "query",
+            "description": "当前页，默认值1",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "keyword",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数目，默认值10",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "originalRef": "CommResult«PageVo«MerchantBossVo»»",
+              "$ref": "#/definitions/CommResult«PageVo«MerchantBossVo»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/admin/shop/shopUpdateList": {
+      "get": {
+        "tags": [
+          "门店"
+        ],
+        "summary": "申请更新资料门店列表",
+        "operationId": "shopUpdateListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "currPage",
+            "in": "query",
+            "description": "当前页，默认值1",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "keyword",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数目，默认值10",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "shopId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updateStatus",
+            "in": "query",
+            "description": "更新状态：0审核中 1通过 2不通过",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "originalRef": "CommResult«PageVo«ShopUpdateVo»»",
+              "$ref": "#/definitions/CommResult«PageVo«ShopUpdateVo»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    }
+  },
+  "definitions": {
+    "BaseQo": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BaseQo"
+    },
+    "BaseVo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BaseVo"
+    },
+    "CheckVo": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "发起/生成/创建时间"
+        },
+        "feedbackMsg": {
+          "type": "string",
+          "description": "审核返回信息"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "passTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "审核通过时间"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "审核状态 0审核中 1审核通过 2审核不通过"
+        }
+      },
+      "title": "CheckVo"
+    },
+    "CommResult«PageVo«MerchantBossVo»»": {
+      "type": "object",
+      "required": [
+        "success"
+      ],
+      "properties": {
+        "data": {
+          "originalRef": "PageVo«MerchantBossVo»",
+          "$ref": "#/definitions/PageVo«MerchantBossVo»"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "title": "CommResult«PageVo«MerchantBossVo»»"
+    },
+    "CommResult«PageVo«ShopUpdateVo»»": {
+      "type": "object",
+      "required": [
+        "success"
+      ],
+      "properties": {
+        "data": {
+          "originalRef": "PageVo«ShopUpdateVo»",
+          "$ref": "#/definitions/PageVo«ShopUpdateVo»"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "title": "CommResult«PageVo«ShopUpdateVo»»"
+    },
+    "MerchantBossVo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "店长手机号"
+        },
+        "shop": {
+          "description": "门店",
+          "originalRef": "ShopVo",
+          "$ref": "#/definitions/ShopVo"
+        }
+      },
+      "title": "MerchantBossVo"
+    },
+    "PageVo«MerchantBossVo»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "分页内容",
+          "items": {
+            "originalRef": "MerchantBossVo",
+            "$ref": "#/definitions/MerchantBossVo"
+          }
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前第几页"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数"
+        },
+        "currElements": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页的元素数量"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页元素个数"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "所有元素个数"
+        },
+        "first": {
+          "type": "boolean",
+          "description": "是否第一页"
+        },
+        "last": {
+          "type": "boolean",
+          "description": "是否最后一页"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "元素偏移量"
+        }
+      },
+      "title": "PageVo«MerchantBossVo»"
+    },
+    "PageVo«ShopUpdateVo»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "分页内容",
+          "items": {
+            "originalRef": "ShopUpdateVo",
+            "$ref": "#/definitions/ShopUpdateVo"
+          }
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前第几页"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数"
+        },
+        "currElements": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页的元素数量"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页元素个数"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "所有元素个数"
+        },
+        "first": {
+          "type": "boolean",
+          "description": "是否第一页"
+        },
+        "last": {
+          "type": "boolean",
+          "description": "是否最后一页"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "元素偏移量"
+        }
+      },
+      "title": "PageVo«ShopUpdateVo»"
+    },
+    "ResourceQo": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "更新/修改时传"
+        },
+        "path": {
+          "type": "string",
+          "description": "资源路径"
+        }
+      },
+      "title": "ResourceQo"
+    },
+    "ResourceVo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "path": {
+          "type": "string",
+          "description": "资源路径"
+        }
+      },
+      "title": "ResourceVo"
+    },
+    "ServiceCategoryQo": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "icon": {
+          "description": "类别图标",
+          "originalRef": "ResourceQo",
+          "$ref": "#/definitions/ResourceQo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "更新/修改时传"
+        },
+        "images": {
+          "type": "array",
+          "description": "类别图片",
+          "items": {
+            "originalRef": "ResourceQo",
+            "$ref": "#/definitions/ResourceQo"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "类别名称"
+        }
+      },
+      "title": "ServiceCategoryQo"
+    },
+    "ServiceQo": {
+      "type": "object",
+      "required": [
+        "category",
+        "name",
+        "price"
+      ],
+      "properties": {
+        "category": {
+          "description": "所属类别",
+          "originalRef": "BaseQo",
+          "$ref": "#/definitions/BaseQo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "更新/修改时传"
+        },
+        "images": {
+          "type": "array",
+          "description": "图片",
+          "items": {
+            "originalRef": "ResourceQo",
+            "$ref": "#/definitions/ResourceQo"
+          }
+        },
+        "introduction": {
+          "type": "integer",
+          "format": "int64",
+          "description": "服务介绍"
+        },
+        "name": {
+          "type": "string",
+          "description": "服务名"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64",
+          "description": "价格，单位：分"
+        }
+      },
+      "title": "ServiceQo"
+    },
+    "ServiceVo": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "所属类别",
+          "originalRef": "BaseVo",
+          "$ref": "#/definitions/BaseVo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "images": {
+          "type": "array",
+          "description": "图片",
+          "items": {
+            "originalRef": "ResourceVo",
+            "$ref": "#/definitions/ResourceVo"
+          }
+        },
+        "introduction": {
+          "type": "integer",
+          "format": "int64",
+          "description": "服务介绍"
+        },
+        "name": {
+          "type": "string",
+          "description": "服务名"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int64",
+          "description": "价格，单位：分"
+        }
+      },
+      "title": "ServiceVo"
+    },
+    "ShopBanQo": {
+      "type": "object",
+      "required": [
+        "shopId",
+        "status"
+      ],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "封禁/解封原因"
+        },
+        "shopId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "门店id"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "封禁状态0解封，1封禁"
+        }
+      },
+      "title": "ShopBanQo"
+    },
+    "ShopCheckQo": {
+      "type": "object",
+      "required": [
+        "shopId",
+        "status"
+      ],
+      "properties": {
+        "feedbackMsg": {
+          "type": "string",
+          "description": "审核返回信息"
+        },
+        "shopId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "门店id"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "审核状态 1审核通过 2审核不通过",
+          "enum": [
+            1,
+            2
+          ]
+        }
+      },
+      "title": "ShopCheckQo"
+    },
+    "ShopInfoVo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "地址"
+        },
+        "city": {
+          "type": "string",
+          "description": "城市"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "结束营业时间"
+        },
+        "identifications": {
+          "type": "array",
+          "description": "证件信息",
+          "items": {
+            "originalRef": "ResourceVo",
+            "$ref": "#/definitions/ResourceVo"
+          }
+        },
+        "images": {
+          "type": "array",
+          "description": "图片",
+          "items": {
+            "originalRef": "ResourceVo",
+            "$ref": "#/definitions/ResourceVo"
+          }
+        },
+        "introduction": {
+          "type": "string",
+          "description": "介绍"
+        },
+        "name": {
+          "type": "string",
+          "description": "门店名称"
+        },
+        "openTime": {
+          "type": "string",
+          "description": "开始营业时间"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "电话"
+        },
+        "services": {
+          "type": "array",
+          "description": "经营项目",
+          "items": {
+            "originalRef": "ServiceVo",
+            "$ref": "#/definitions/ServiceVo"
+          }
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "description": "门店类型：0个人 1公司/企业"
+        }
+      },
+      "title": "ShopInfoVo"
+    },
+    "ShopUpdateCheckQo": {
+      "type": "object",
+      "required": [
+        "shopUpdateId",
+        "status"
+      ],
+      "properties": {
+        "feedbackMsg": {
+          "type": "string",
+          "description": "审核返回信息"
+        },
+        "shopUpdateId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "更新id"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "审核状态 1审核通过 2审核不通过",
+          "enum": [
+            1,
+            2
+          ]
+        }
+      },
+      "title": "ShopUpdateCheckQo"
+    },
+    "ShopUpdateVo": {
+      "type": "object",
+      "properties": {
+        "check": {
+          "description": "审核信息",
+          "originalRef": "CheckVo",
+          "$ref": "#/definitions/CheckVo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "newShopInfo": {
+          "description": "更新资料",
+          "originalRef": "ShopInfoVo",
+          "$ref": "#/definitions/ShopInfoVo"
+        },
+        "oldShopInfo": {
+          "description": "原资料",
+          "originalRef": "ShopInfoVo",
+          "$ref": "#/definitions/ShopInfoVo"
+        }
+      },
+      "title": "ShopUpdateVo"
+    },
+    "ShopVo": {
+      "type": "object",
+      "properties": {
+        "check": {
+          "description": "审核信息",
+          "originalRef": "CheckVo",
+          "$ref": "#/definitions/CheckVo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "shopInfo": {
+          "description": "门店信息",
+          "originalRef": "ShopInfoVo",
+          "$ref": "#/definitions/ShopInfoVo"
+        },
+        "updateStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "门店更新资料状态：null未申请过更新资料 0审核中 1审核通过 2审核不通过"
+        }
+      },
+      "title": "ShopVo"
+    }
+  }
+}

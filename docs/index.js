@@ -2,8 +2,8 @@
 const $ = (selectors) => document.querySelector(selectors)
 /** @param {string} selectors */
 const $$ = (selectors) => document.querySelectorAll(selectors)
-/** @type {{api(config):string, types(config):string}}  */
-const ACB = window.ACB
+/** @type {{buildApi(config: ApiConfig): string}}  */
+const codeBuilder = window.codeBuilder
 /** @type {{say(word:string), tell(word:string)}} */
 const Animal = window.Animal
 
@@ -32,12 +32,10 @@ $('#transform-btn').addEventListener('click', async () => {
   const config = await getConfig()
   if(!config.swagger) Animal.tell(ERROR + '目前只支持 swagger 文档')
   const {version} = setting
-  $('#api-code').value = ACB.api({ version, ...config })
-  if(setting.version === 'ts') {
-    $('#types-code').value = ACB.types(config)
-    $('#types-code').hidden = false
-  } else {
-    $('#types-code').hidden = true
-  }
+  $('#api-code').value = codeBuilder.buildApi({
+    version,
+    paths: config.paths,
+    definitions: config.definitions,
+  })
   Animal.say('转换成功!')
 })
