@@ -1,21 +1,21 @@
 # api-code-builder
 
-English | [简体中文](./README.zh.md)
+[English](./README.md) | 简体中文
 
-build your axios code from swagger document (not support swagger v3)
+使用 swagger 文档来自动构建你的 axios api 代码 (不支持 swagger v3)
 
-and have good Intelligence in vscode
-* create jsdoc in js
-* create typing in ts
+生成的代码在 vscode 中具有良好提示
+* 在 js 文件中生成 jsdoc
+* 在 ts 文件中生成 typing
 
-# online experience
+# 在线体验
 https://coppyc.github.io/api-code-builder/
 
-# get started
+# 开始使用
 ```
 yarn add -D api-code-builder
 ```
-then add npm script `"build:api": "api-code-builder"` to your `package.json` scripts
+然后添加 npm 脚本 `"build:api": "api-code-builder"` 到 `package.json` 的 `scripts` 字段中
 ```json
 {
   "scripts": {
@@ -23,17 +23,18 @@ then add npm script `"build:api": "api-code-builder"` to your `package.json` scr
   }
 }
 ```
-finally, run and answer some questions, enjoy it!
+最后，运行脚本然后回答一些问题。
+enjoy it!
 ```
 yarn build:api
 ```
 ![image](https://user-images.githubusercontent.com/25004510/65371821-29733080-dc9a-11e9-8fbd-e4dc70ce706c.png)
 
-# use in node
+# 在 node 中调用 api
 
 ```js
 const apiCodeBuilder = require('api-code-builder')
-const docs = { /** */ } // you need to get the swagger document by yourself
+const docs = { /** */ } // 你需要自动获取 swagger 的 json 配置
 
 const code = apiCodeBuilder.buildApi({
   paths: docs.paths,

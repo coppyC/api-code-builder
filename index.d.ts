@@ -2,7 +2,7 @@ interface ApiConfig {
   paths: any
   version?: 'ts' | 'js'
   definitions?: any
-  customResponse?: boolean
+  customResponse?: string
   axiosFrom?: string
 }
 
