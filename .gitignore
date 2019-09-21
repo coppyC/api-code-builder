@@ -2,5 +2,6 @@ node_modules
 coverage
 dist
 api.config.json
+yarn-error.log
 
 .DS_Store
