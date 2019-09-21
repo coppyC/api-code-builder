@@ -1,7 +1,0 @@
-{
-  "version": "ts",
-  "swaggerURL": "https://petstore.swagger.io/v2/swagger.json",
-  "axiosFrom": "axios",
-  "customResponse": "",
-  "output": "api.ts"
-}

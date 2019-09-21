@@ -42,6 +42,35 @@ async function build(config) {
 function askQuestions() {
   inquirer.prompt([
     {
+      message: 'swagger document url',
+      name: 'swaggerURL',
+      type: 'input',
+      validate: (input) => input ? true : 'it\'s reuqired',
+    },
+    {
+      message: 'choose document',
+      name: 'group',
+      type: 'list',
+      when(answers) {
+        if (/\.html([?#].*)?$/.test(answers.swaggerURL)) {
+          answers.swaggerURL = String(answers.swaggerURL)
+            .replace(/(https?:\/\/[^/]*\/[^/]*).*/, '$1')
+          return true
+        }
+        return false
+      },
+      async choices({swaggerURL}) {
+        const url = swaggerURL + '/swagger-resources'
+        const { data } = await axios.get(url)
+        return Array.from(data).map(item => ({
+          name: item.name,
+          value: String(item.url).replace(/#.*/, '').replace(/\?.*/, $ => (
+            $.replace(/=([^&]*)(?=&?)/g, (_, $1) => '=' + encodeURIComponent($1) )
+          )),
+        }))
+      }
+    },
+    {
       message: 'what\'s kind of the file?',
       name: 'version',
       type: 'list',
@@ -49,12 +78,6 @@ function askQuestions() {
         {name: 'javascript', value: 'js'},
         {name: 'typescript', value: 'ts'},
       ]
-    },
-    {
-      message: 'swagger document url',
-      name: 'swaggerURL',
-      type: 'input',
-      validate: (input) => input ? true : 'it\'s reuqired'
     },
     {
       message: 'where\'s axios import from',
@@ -81,8 +104,14 @@ function askQuestions() {
       default: true
     },
   ]).then(answers => {
+    console.log(answers)
+    if(answers.group) {
+      answers.swaggerURL += answers.group
+      delete answers.group
+    }
     if (answers.saveConfig) {
       delete answers.saveConfig
+      delete answers.group
       fs.writeFile(
         CONFIG_FILE_PATH,
         JSON.stringify(answers, null, 2) + '\n',
@@ -93,11 +122,15 @@ function askQuestions() {
   })
 }
 
-fs.readFile(CONFIG_FILE_PATH, (err, data) => {
-  if (err) {
-    askQuestions()
-    return
-  }
-  const config = JSON.parse(data)
-  build(config)
-})
+function run() {
+  fs.readFile(CONFIG_FILE_PATH, (err, data) => {
+    if (err) {
+      askQuestions()
+      return
+    }
+    const config = JSON.parse(data)
+    build(config)
+  })
+}
+
+run()
