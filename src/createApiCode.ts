@@ -4,6 +4,7 @@ import Groups from "./Groups";
 import ParameterGroup from "./ParameterGroup";
 import urlResolve from "./urlResolve";
 import comment from "./comment";
+import formdataCode from "./formdataCode";
 
 interface Config {
   paths: Paths
@@ -12,12 +13,6 @@ interface Config {
   customResponse?: string
   axiosFrom?: string
 }
-
-const formDataCodeArr = [
-  'const data = new FormData()',
-  'for(let name in formData)',
-  '  data.append(name, formData[name])',
-]
 
 export default function (config: Config) {
   if (!config.version) config.version = 'js'
@@ -37,14 +32,14 @@ export default function (config: Config) {
       codes.push(...comment([
         ctx.summary,
         ctx.description && `@explain ${ctx.description}`,
-        ...ParameterGroup.jsdocObj(parameterGroup),
+        ...config.version == 'js' ? ParameterGroup.jsdocObj(parameterGroup) : [],
       ]))
       const responseType = config.version === 'ts' && config.customResponse
         ? `: Promise<${config.customResponse}>` : ''
       codes.push(`${apiName}(${paramString})${responseType} {`)
       codes.push(`const method = '${ctx.method}'`)
       const axiosConfig = ParameterGroup.axiosConfig(parameterGroup)
-      if(parameterGroup.formData) codes.push(...formDataCodeArr)
+      if(parameterGroup.formData) codes.push(...formdataCode(config.version))
       codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig} })`)
       codes.push(`},`)
     })

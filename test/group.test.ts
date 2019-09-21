@@ -12,5 +12,5 @@ test('base test', () => {
 
 test('with path var', () => {
   const groups = Groups({ '/admin/login/{id}': docs.paths['/admin/login'] } as any)
-  expect(Object.keys(groups.admin.apis)).toEqual(['postLoginId'])
+  expect(Object.keys(groups.admin.apis)).toEqual(['postLoginById'])
 })

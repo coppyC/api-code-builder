@@ -20,10 +20,11 @@ function getApiNameFrom(pathName: string) {
     .split('/')
     .filter(x => x)
     .slice(1)
+    .map(item => item.replace(/\{(.*)\}/, (_, $1) => `By${upperFirstCase($1)}`))
     .map(lintVariable)
     .map(upperFirstCase)
     .join('')
-    || 'root'
+    || ''
 }
 
 function initGroup(pathNames: string[]) {
