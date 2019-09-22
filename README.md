@@ -29,7 +29,8 @@ yarn build:api
 ```
 ![image](https://user-images.githubusercontent.com/25004510/65371821-29733080-dc9a-11e9-8fbd-e4dc70ce706c.png)
 
-# use in node
+# other ways to use
+## use in node or browser with npm
 
 ```js
 const apiCodeBuilder = require('api-code-builder')
@@ -44,4 +45,9 @@ const code = apiCodeBuilder.buildApi({
 })
 
 console.log(code)
+```
+
+## use in browser with cdn
+``` html
+<script src="https://unpkg.com/api-code-builder@2.x/dist/main.umd.js"></script>
 ```

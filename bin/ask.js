@@ -1,0 +1,89 @@
+const inquirer = require('inquirer')
+const request = require('./request')
+const saveFile = require('./saveFile')
+
+module.exports = function () {
+  return new Promise(resolve => {
+    inquirer.prompt([
+      {
+        message: 'swagger document url',
+        name: 'swaggerURL',
+        type: 'input',
+        validate: (input) => input ? true : 'it\'s reuqired',
+      },
+      {
+        message: 'choose document',
+        name: 'group',
+        type: 'list',
+        when(answers) {
+          if (/\.html([?#].*)?$/.test(answers.swaggerURL)) {
+            answers.swaggerURL = String(answers.swaggerURL)
+              .replace(/(https?:\/\/[^/]*\/[^/]*).*/, '$1')
+            return true
+          }
+          return false
+        },
+        async choices({swaggerURL}) {
+          const url = swaggerURL + '/swagger-resources'
+          const resources = await request(url)
+          if (!(resources instanceof Array)) throw `${swaggerURL} may not a swagger document url`
+          return Array.from(resources).map(item => ({
+            name: item.name,
+            value: String(item.url).replace(/#.*/, '').replace(/\?.*/, $ => (
+              $.replace(/=([^&]*)(?=&?)/g, (_, $1) => '=' + encodeURIComponent($1) )
+            )),
+          }))
+        }
+      },
+      {
+        message: 'what\'s kind of the file?',
+        name: 'version',
+        type: 'list',
+        choices: [
+          {name: 'javascript', value: 'js'},
+          {name: 'typescript', value: 'ts'},
+        ]
+      },
+      {
+        message: 'where\'s axios import from',
+        name: 'axiosFrom',
+        type: 'input',
+        default: 'axios',
+      },
+      {
+        message: 'custom response ?',
+        when: ({version}) => version === 'ts',
+        name: 'customResponse',
+        type: 'input',
+      },
+      {
+        message: 'where to output?',
+        name: 'output',
+        type: 'input',
+        default: ({version}) => 'src/api.' + version,
+      },
+      {
+        message: 'need to save a config file?',
+        name: 'saveConfig',
+        type: 'confirm',
+        default: true
+      },
+    ]).then(answers => {
+      if(answers.group) {
+        answers.swaggerURL += answers.group
+        delete answers.group
+      }
+      if (answers.saveConfig) {
+        delete answers.saveConfig
+        delete answers.group
+        saveFile(
+          'api.config.json',
+          JSON.stringify(answers, null, 2) + '\n',
+          () => console.log('save config file success: api.config.json')
+        )
+      }
+      resolve(answers)
+    })
+  })
+
+}

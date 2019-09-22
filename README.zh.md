@@ -12,10 +12,15 @@
 https://coppyc.github.io/api-code-builder/
 
 # 开始使用
+下面使用命令行 cli 的方式 (推荐)
+1. 添加npm包
 ```
 yarn add -D api-code-builder
 ```
-然后添加 npm 脚本 `"build:api": "api-code-builder"` 到 `package.json` 的 `scripts` 字段中
+
+2. 添加 npm 脚本
+
+把 `"build:api": "api-code-builder"` 添加到 `package.json` 的 `scripts` 字段中
 ```json
 {
   "scripts": {
@@ -23,14 +28,17 @@ yarn add -D api-code-builder
   }
 }
 ```
-最后，运行脚本然后回答一些问题。
+3. 运行脚本
+
+运行脚本然后回答一些问题。
 enjoy it!
 ```
 yarn build:api
 ```
 ![image](https://user-images.githubusercontent.com/25004510/65371821-29733080-dc9a-11e9-8fbd-e4dc70ce706c.png)
 
-# 在 node 中调用 api
+# 其它使用方式
+## 在 node 或浏览器中调用 api
 
 ```js
 const apiCodeBuilder = require('api-code-builder')
@@ -45,4 +53,9 @@ const code = apiCodeBuilder.buildApi({
 })
 
 console.log(code)
+```
+
+## 在浏览器中使用 cdn
+``` html
+<script src="https://unpkg.com/api-code-builder@2.x/dist/main.umd.js"></script>
 ```
