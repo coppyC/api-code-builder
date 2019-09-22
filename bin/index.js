@@ -32,6 +32,7 @@ async function run () {
   const document = await fetchDocument(config.swaggerURL)
   const code = apiCodeBuilder.buildApi({
     paths: document.paths,
+    baseURL: document.basePath,
     definitions: document.definitions,
     ...config,
   })

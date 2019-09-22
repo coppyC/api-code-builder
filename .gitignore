@@ -3,5 +3,6 @@ coverage
 dist
 api.config.json
 yarn-error.log
+/api.ts
 
 .DS_Store

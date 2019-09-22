@@ -1,2 +1,5 @@
+体验优化:
 ☐ 外部声明 Path Query 参数类型
-☐ 插入提示 description
+☐ 插入 typing 属性的 description
+☐ cli 支持多 swaggerUrl, 若 baseUrl 不同，则自动插入 baseUrl 到 url
+☐ 多语言支持
