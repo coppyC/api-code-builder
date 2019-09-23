@@ -1,5 +1,7 @@
 /// <reference path="./typings.d.ts" />
 import DataType from "./DataType"
+import { lintVariable, upperFirstCase } from "./utils"
+import comment from "./comment"
 
 interface ParameterGroup {
   path?: Parameter[]
@@ -9,9 +11,7 @@ interface ParameterGroup {
 }
 
 function ParameterDataType(parameter: Parameter) {
-  return parameter.schema
-    ? DataType(parameter.schema)
-    : DataType(parameter)
+  return DataType(parameter.schema || parameter)
 }
 
 export default function ParameterGroup(parameters: Parameter[] = []) {
@@ -44,13 +44,13 @@ export default function ParameterGroup(parameters: Parameter[] = []) {
   return p
 }
 
-ParameterGroup.string = function (parameterGroup: ParameterGroup, version?: 'ts' | 'js') {
+ParameterGroup.string = function (parameterGroup: ParameterGroup, baseTypeName: string, version?: 'ts' | 'js') {
   if (version === 'js')
     return Object.keys(parameterGroup).join(', ')
   return Object.entries(parameterGroup)
     .map(([name, parameters]) => name === 'data'
       ? `data: ${ParameterDataType(parameters)}`
-      : `${name}: { ${ParameterGroup.createTyping(parameters)} }`
+      : `${name}: ${(baseTypeName + upperFirstCase(name))}`
     )
     .join(', ')
 }
@@ -58,7 +58,7 @@ ParameterGroup.jsdocObj = function (parameterGroup: ParameterGroup) {
   return Object.entries(parameterGroup)
     .map(([name, parameters]) => name === 'data'
       ? `@param {${ParameterDataType(parameters)}} ${name}`
-      : `@param {{ ${ParameterGroup.createTyping(parameters)} }} ${name}`
+      : `@param {{ ${createTypingSnippet(parameters)} }} ${name}`
     )
 }
 
@@ -74,8 +74,27 @@ function required(required?: boolean) {
   return '?'
 }
 
-ParameterGroup.createTyping = function (parameters: Parameter[]) {
+function createTypingSnippet(parameters: Parameter[]) {
   return parameters.map(parameter => (
-    `${parameter.name}${required(parameter.required)}: ${DataType(parameter)}`
+    `${parameter.name}${required(parameter.required)}: ${ParameterDataType(parameter)}`
   )).join(', ')
+}
+
+export function TypingfromParameters(typeName: string, parameters: Parameter[], version?: 'js' | 'ts'): string[] {
+  typeName = lintVariable(typeName)
+  if (version === 'js') {
+    return comment([
+      `@typedef ${typeName}`,
+      ...parameters.map(parameter => (
+        `@property {${ParameterDataType(parameter)}} ${parameter.name}`
+      ))
+    ])
+  }
+  return [
+    `export interface ${typeName} {`,
+    ...parameters.map(parameter => (
+      `${parameter.name}${required(parameter.required)}: ${ParameterDataType(parameter)}`
+    )),
+    '}'
+  ]
 }

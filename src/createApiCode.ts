@@ -1,10 +1,11 @@
 import format from "./format";
 import Typing from "./Typing";
 import Groups from "./Groups";
-import ParameterGroup from "./ParameterGroup";
+import ParameterGroup, { TypingfromParameters } from "./ParameterGroup";
 import urlResolve from "./urlResolve";
 import comment from "./comment";
 import formdataCode from "./formdataCode";
+import { upperFirstCase } from "./utils";
 
 interface Config {
   paths: Paths
@@ -25,8 +26,8 @@ export default function (config: Config) {
   codes.push(`import axios from '${config.axiosFrom || 'axios'}'`, '')
   if(config.baseURL) codes.push(`axios.defaults.baseURL = '${config.baseURL}'`, '')
   codes.push('export default {')
-  Object.entries(groups).forEach(([name, group], i, {length}) => {
-    codes.push(`${name}: {`)
+  Object.entries(groups).forEach(([groupName, group], i, {length}) => {
+    codes.push(`${groupName}: {`)
     Object.entries(group.apis).forEach(([apiName, ctx], i, {length}) => {
       const parameterGroup = ParameterGroup(ctx.parameters)
       codes.push(...comment([
@@ -34,7 +35,16 @@ export default function (config: Config) {
         ctx.description && `@explain ${ctx.description}`,
         ...config.version == 'js' ? ParameterGroup.jsdocObj(parameterGroup) : [],
       ]))
-      const paramString = ParameterGroup.string(parameterGroup, config.version)
+      const baseTypeName = upperFirstCase(groupName) + upperFirstCase(apiName)
+      if (config.version === 'ts') Object.entries(parameterGroup).forEach(([paramName, parameters]) => {
+        if (paramName === 'data') return
+        typingCodes.push(...TypingfromParameters(
+          baseTypeName + upperFirstCase(paramName),
+          parameters,
+          config.version
+        ))
+      })
+      const paramString = ParameterGroup.string(parameterGroup, baseTypeName, config.version)
       const responseType = config.version === 'ts' && config.customResponse
         ? `: Promise<${config.customResponse}>` : ''
       codes.push(`${apiName}(${paramString})${responseType} {`)

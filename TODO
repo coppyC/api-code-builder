@@ -1,5 +1,5 @@
 体验优化:
-☐ 外部声明 Path Query 参数类型
+✔ 外部声明 Path Query 参数类型 (只对ts版本有效) @done(19-09-23 15:56)
 ☐ 插入 typing 属性的 description
-☐ cli 支持多 swaggerUrl, 若 baseUrl 不同，则自动插入 baseUrl 到 url
+✔ cli 支持多 swaggerUrl @done(19-09-23 15:03)
 ☐ 多语言支持

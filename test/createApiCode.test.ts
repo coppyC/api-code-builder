@@ -5,8 +5,8 @@ test('', () => {
   const a = createApiCode({
     paths: docs.paths as any,
     definitions: docs.definitions as any,
-    version: 'js',
+    version: 'ts',
     customResponse: 'any',
   })
-  // console.log(a)
+  console.log(a)
 })

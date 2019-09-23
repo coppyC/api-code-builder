@@ -45,11 +45,11 @@ describe('param definition string', () => {
     }
   ] as any)
   test('js version', () => {
-    const result = ParameterGroup.string(parameterGroup, 'js')
+    const result = ParameterGroup.string(parameterGroup, 'Test', 'js')
     expect(result).toBe('path, params, data')
   })
   test('ts version', () => {
-    const result = ParameterGroup.string(parameterGroup, 'ts')
-    expect(result).toBe('path: { id: number }, params: { name?: string }, data: AccountParam')
+    const result = ParameterGroup.string(parameterGroup, 'Test', 'ts')
+    expect(result).toBe('path: TestPath, params: TestParams, data: AccountParam')
   })
 })
