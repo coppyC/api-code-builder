@@ -64,6 +64,8 @@ module.exports = function () {
       answers = Object.assign({}, answers, {
         axiosFrom: '',
         customResponse: '',
+        addHostToBaseUrl: false,
+        protocol: 'https',
       })
       if(answers.group) {
         answers.swaggerURL = answers.group

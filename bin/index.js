@@ -42,10 +42,8 @@ async function run () {
   } catch (e) {
     config = await ask()
   }
-  if (!(config.swaggerURL instanceof Array)) {
-    console.log('the config is the older version, need to get the new config')
-    config = await ask()
-  }
+  if (!(config.swaggerURL instanceof Array))
+    config.swaggerURL = [config.swaggerURL]
   const documents = await Promise.all(
     Array.from(config.swaggerURL).map(url => (
       fetchDocument(url)
@@ -56,6 +54,9 @@ async function run () {
     return console.error('dont \' have the same baseURL or host, can\'t merge the documents.')
 
   const document = merge(...documents)
+
+  if (config.addHostToBaseUrl)
+    document.basePath = `${config.protocol || 'https'}://${document.host}${document.basePath}`
 
   const code = apiCodeBuilder.buildApi({
     paths: document.paths,
