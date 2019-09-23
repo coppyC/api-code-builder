@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const path = require('path')
+const merge = require('./merge')
 const ask = require('./ask')
 const request = require('./request')
 const saveFile = require('./saveFile')
@@ -8,10 +9,10 @@ const apiCodeBuilder = require('../dist/main')
 
 async function fetchDocument(url) {
   const startTime = Date.now()
-  console.log('fetch document...')
+  console.log(`fetch document ${decodeURIComponent(url)} ...`)
   const document = await request(url)
   const endTime = Date.now()
-  console.log(`fetch complete (${((endTime - startTime)/1000).toFixed(1)}.s)`)
+  console.log(`fetch ${decodeURIComponent(url)} complete (${((endTime - startTime)/1000).toFixed(1)}.s)`)
   const throwUrlError = () => {
     throw `url [${url}] wrong, it\'s not a swagger document url`
   }
@@ -20,16 +21,42 @@ async function fetchDocument(url) {
   return document
 }
 
+function checkBasePath(documents) {
+  if (documents.length === 0) {
+    console.error('you need to choose a document at least')
+    return
+  }
+  const basePath = documents[0].basePath
+  const host = documents[0].host
+  return Array.from(documents).every(doc => (
+    doc.basePath === basePath && doc.host === host
+  ))
+}
+
 async function run () {
   const configPath = path.resolve('api.config.json')
   let config = {}
   try {
     config = require(configPath)
-    console.log('found the config file, don\'t ask again.')
+    console.log('found the config file')
   } catch (e) {
     config = await ask()
   }
-  const document = await fetchDocument(config.swaggerURL)
+  if (!(config.swaggerURL instanceof Array)) {
+    console.log('the config is the older version, need to get the new config')
+    config = await ask()
+  }
+  const documents = await Promise.all(
+    Array.from(config.swaggerURL).map(url => (
+      fetchDocument(url)
+    ))
+  )
+
+  if (!checkBasePath(documents))
+    return console.error('dont \' have the same baseURL or host, can\'t merge the documents.')
+
+  const document = merge(...documents)
+
   const code = apiCodeBuilder.buildApi({
     paths: document.paths,
     baseURL: document.basePath,
@@ -37,6 +64,7 @@ async function run () {
     ...config,
   })
   saveFile(config.output, code)
+  console.log('save api file to here successful: ', path.resolve(config.output))
 }
 
 run()

@@ -9,12 +9,16 @@ module.exports = function () {
         message: 'swagger document url',
         name: 'swaggerURL',
         type: 'input',
-        validate: (input) => input ? true : 'it\'s reuqired',
+        validate(input) {
+          if (!input) return 'it\'s reuqired'
+          if (!/https?/.test(input)) return 'it need to start with http or https'
+          return true
+        },
       },
       {
-        message: 'choose document',
+        message: 'choose documents',
         name: 'group',
-        type: 'list',
+        type: 'checkbox',
         when(answers) {
           if (/\.html([?#].*)?$/.test(answers.swaggerURL)) {
             answers.swaggerURL = String(answers.swaggerURL)
@@ -29,11 +33,11 @@ module.exports = function () {
           if (!(resources instanceof Array)) throw `${swaggerURL} may not a swagger document url`
           return Array.from(resources).map(item => ({
             name: item.name,
-            value: String(item.url).replace(/#.*/, '').replace(/\?.*/, $ => (
+            value: swaggerURL + String(item.url).replace(/#.*/, '').replace(/\?.*/, $ => (
               $.replace(/=([^&]*)(?=&?)/g, (_, $1) => '=' + encodeURIComponent($1) )
             )),
           }))
-        }
+        },
       },
       {
         message: 'what\'s kind of the file?',
@@ -43,18 +47,6 @@ module.exports = function () {
           {name: 'javascript', value: 'js'},
           {name: 'typescript', value: 'ts'},
         ]
-      },
-      {
-        message: 'where\'s axios import from',
-        name: 'axiosFrom',
-        type: 'input',
-        default: 'axios',
-      },
-      {
-        message: 'custom response ?',
-        when: ({version}) => version === 'ts',
-        name: 'customResponse',
-        type: 'input',
       },
       {
         message: 'where to output?',
@@ -69,10 +61,16 @@ module.exports = function () {
         default: true
       },
     ]).then(answers => {
+      answers = Object.assign({}, answers, {
+        axiosFrom: '',
+        customResponse: '',
+      })
       if(answers.group) {
-        answers.swaggerURL += answers.group
+        answers.swaggerURL = answers.group
         delete answers.group
       }
+      if(typeof answers.swaggerURL === 'string')
+        answers.swaggerURL = [ answers.swaggerURL ]
       if (answers.saveConfig) {
         delete answers.saveConfig
         delete answers.group
