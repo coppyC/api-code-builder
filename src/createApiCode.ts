@@ -29,18 +29,18 @@ export default function (config: Config) {
     codes.push(`${name}: {`)
     Object.entries(group.apis).forEach(([apiName, ctx], i, {length}) => {
       const parameterGroup = ParameterGroup(ctx.parameters)
-      const paramString = ParameterGroup.string(parameterGroup, config.version)
       codes.push(...comment([
         ctx.summary,
         ctx.description && `@explain ${ctx.description}`,
         ...config.version == 'js' ? ParameterGroup.jsdocObj(parameterGroup) : [],
       ]))
+      const paramString = ParameterGroup.string(parameterGroup, config.version)
       const responseType = config.version === 'ts' && config.customResponse
         ? `: Promise<${config.customResponse}>` : ''
       codes.push(`${apiName}(${paramString})${responseType} {`)
       codes.push(`const method = '${ctx.method}'`)
       const axiosConfig = ParameterGroup.axiosConfig(parameterGroup)
-      if(parameterGroup.formData) codes.push(...formdataCode(config.version))
+      if(parameterGroup.formData) codes.push(...formdataCode())
       codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig} })`)
       codes.push('}' + (length !== i+1 ? ',' : ''))
     })
