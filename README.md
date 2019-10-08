@@ -51,3 +51,8 @@ console.log(code)
 ``` html
 <script src="https://unpkg.com/api-code-builder@2.x/dist/main.umd.js"></script>
 ```
+
+# new version plan
+- a adapter from swagger to axios in running time.
+- output the swagger.json file as the adapter input
+- only product js + .d.ts at once then only update without js

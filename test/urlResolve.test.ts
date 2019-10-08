@@ -9,3 +9,8 @@ test('有 path 参数', () => {
   const code = urlResolve('/a/b/c/{id}')
   expect(code).toBe('`/a/b/c/${path.id}`')
 })
+
+test('多个 path 参数', () => {
+  const code = urlResolve('/a/b/c/{id}/{name}')
+  expect(code).toBe('`/a/b/c/${path.id}/${path.name}`')
+})

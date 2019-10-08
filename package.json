@@ -1,6 +1,6 @@
 {
   "name": "api-code-builder",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "js/ts api code build from swagger",
   "main": "dist/main.js",
   "bin": {
@@ -18,8 +18,9 @@
   "scripts": {
     "test": "jest",
     "watch": "jest --watch",
+    "build": "rollup -c",
     "build:api": "./bin/index.js",
-    "prepublishOnly": "rollup -c"
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "inquirer": "^7.0.0"
