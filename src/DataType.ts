@@ -9,7 +9,8 @@ const getEnums = (enums: any[]) =>
       ? `'${item}'` : item
   )).join('|')})`
 
-export default function DataType(property: DataType): string {
+export default function DataType(property?: Swagger.Schema): string {
+  if (!property) return 'any'
   return property.$ref
     ? getRef(property.$ref)
     : property.items

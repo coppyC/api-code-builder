@@ -1,7 +1,7 @@
 import DataType from './DataType'
 import { lintVariable } from './utils'
 
-export default function (definitions: Definitions, version?: 'js' | 'ts'): string[] {
+export default function (definitions: Swagger.Definitions, version?: 'js' | 'ts'): string[] {
   if (version === 'js') return jsdocTypedef(definitions)
   const lines: string[] = []
   Object.entries(definitions).forEach(([key, definition]) => {
@@ -18,7 +18,7 @@ export default function (definitions: Definitions, version?: 'js' | 'ts'): strin
   return lines
 }
 
-export function jsdocTypedef(definitions: Definitions): string[] {
+export function jsdocTypedef(definitions: Swagger.Definitions): string[] {
   const lines: string[] = []
   Object.entries(definitions).forEach(([key, definition]) => {
     lines.push('/**')

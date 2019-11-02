@@ -3,7 +3,7 @@ import { upperFirstCase, lintVariable } from './utils'
 interface Groups {
   [group: string]: {
     apis: {
-      [api: string]: Api & {
+      [api: string]: Swagger.Operation & {
         path: string
         method: string
       }
@@ -40,7 +40,7 @@ function initGroup(pathNames: string[]) {
 }
 
 
-export default function (paths: Paths, tags?: Tag[]): Groups {
+export default function (paths: Swagger.Paths, tags?: Swagger.Tag[]): Groups {
   const groups = initGroup(Object.keys(paths))
   Object.keys(paths).forEach(path => {
     const groupName = getGroupNameFrom(path)

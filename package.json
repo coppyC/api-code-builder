@@ -1,6 +1,6 @@
 {
   "name": "api-code-builder",
-  "version": "2.3.6",
+  "version": "2.3.7",
   "description": "js/ts api code build from swagger",
   "main": "dist/main.js",
   "bin": {
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
+    "@types/swagger": "coppyc/types#swagger",
     "jest": "^24.7.1",
     "rollup": "^1.21.4",
     "rollup-plugin-typescript2": "^0.24.2",

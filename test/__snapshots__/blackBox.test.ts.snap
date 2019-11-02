@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`black box 1`] = `
+"import axios from 'axios'
+
+axios.defaults.baseURL = '/xxx'
+
+export default {
+  admin: {
+    /**
+     * 登录
+     * @explain 开发环境初始账号密码：         xxxx         xxxx
+     */
+    postLogin(params: AdminPostLoginParams): Promise<any['data']> {
+      const method = 'post'
+      return axios('/admin/login', { method, params }) as any
+    },
+    /** 封禁/解封门店 */
+    postShopBanShop(data: ShopBanQo): Promise<object['data']> {
+      const method = 'post'
+      return axios('/admin/shop/banShop', { method, data }) as any
+    },
+    /** 审核门店 */
+    postShopCheckShop(data: ShopCheckQo): Promise<object['data']> {
+      const method = 'post'
+      return axios('/admin/shop/checkShop', { method, data }) as any
+    },
+    /** 审核门店资料更新 */
+    postShopCheckShopUpdate(data: ShopUpdateCheckQo): Promise<object['data']> {
+      const method = 'post'
+      return axios('/admin/shop/checkShopUpdate', { method, data }) as any
+    },
+    /** 删除服务 */
+    deleteShopDeleteService(params: AdminDeleteShopDeleteServiceParams): Promise<object['data']> {
+      const method = 'delete'
+      return axios('/admin/shop/deleteService', { method, params }) as any
+    },
+    /** 删除服务分类 */
+    deleteShopDeleteServiceCategory(params: AdminDeleteShopDeleteServiceCategoryParams): Promise<object['data']> {
+      const method = 'delete'
+      return axios('/admin/shop/deleteServiceCategory', { method, params }) as any
+    },
+    /** 设置服务 */
+    postShopSaveService(data: ServiceQo[]): Promise<object['data']> {
+      const method = 'post'
+      return axios('/admin/shop/saveService', { method, data }) as any
+    },
+    /** 设置服务分类 */
+    postShopSaveServiceCategory(data: ServiceCategoryQo[]): Promise<object['data']> {
+      const method = 'post'
+      return axios('/admin/shop/saveServiceCategory', { method, data }) as any
+    },
+    /** 门店列表(包括审核列表) */
+    getShopShopList(params: AdminGetShopShopListParams): Promise<CommResultPageVoMerchantBossVo['data']> {
+      const method = 'get'
+      return axios('/admin/shop/shopList', { method, params }) as any
+    },
+    /** 申请更新资料门店列表 */
+    getShopShopUpdateList(params: AdminGetShopShopUpdateListParams): Promise<CommResultPageVoShopUpdateVo['data']> {
+      const method = 'get'
+      return axios('/admin/shop/shopUpdateList', { method, params }) as any
+    }
+  }
+}
+
+export interface AdminPostLoginParams {
+  account: string
+  captcha: string
+  credentials: string
+}
+export interface AdminDeleteShopDeleteServiceParams {
+  serviceId: string
+}
+export interface AdminDeleteShopDeleteServiceCategoryParams {
+  serviceCategoryId: string
+}
+export interface AdminGetShopShopListParams {
+  checkStatus?: number
+  currPage?: number
+  keyword?: string
+  pageSize?: number
+}
+export interface AdminGetShopShopUpdateListParams {
+  currPage?: number
+  keyword?: string
+  pageSize?: number
+  shopId?: string
+  updateStatus?: ('0'|'1'|'2')
+}
+"
+`;

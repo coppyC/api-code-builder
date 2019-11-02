@@ -1,8 +1,8 @@
-/// <reference path="./typings.d.ts" />
 import DataType from "./DataType"
 import { lintVariable, upperFirstCase } from "./utils"
 import comment from "./comment"
 
+type Parameter = Swagger.Parameter
 interface ParameterGroup {
   path?: Parameter[]
   params?: Parameter[]

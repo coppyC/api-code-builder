@@ -6,12 +6,13 @@ import urlResolve from "./urlResolve";
 import comment from "./comment";
 import formdataCode from "./formdataCode";
 import { upperFirstCase } from "./utils";
+import DataType from "./DataType";
 
 interface Config {
-  paths: Paths
+  paths: Swagger.Paths
   version?: 'ts' | 'js'
   baseURL?: string
-  definitions?: Definitions
+  definitions?: Swagger.Definitions
   customResponse?: string
   axiosFrom?: string
 }
@@ -45,13 +46,16 @@ export default function (config: Config) {
         ))
       })
       const paramString = ParameterGroup.string(parameterGroup, baseTypeName, config.version)
-      const responseType = config.version === 'ts' && config.customResponse
-        ? `: Promise<${config.customResponse}>` : ''
+      let responseType = DataType(ctx.responses['200'].schema)
+      if (config.customResponse) responseType = `Promise<${config.customResponse.replace('RESPONSE', responseType)}>`
+      else responseType = `AxiosPromise<${responseType}>`
+      if (config.version === 'ts') responseType = `: ${responseType}`
+      else responseType = ''
       codes.push(`${apiName}(${paramString})${responseType} {`)
       codes.push(`const method = '${ctx.method}'`)
       const axiosConfig = ParameterGroup.axiosConfig(parameterGroup)
       if(parameterGroup.formData) codes.push(...formdataCode())
-      codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig} })`)
+      codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig} })` + (config.customResponse ? ' as any' : ''))
       codes.push('}' + (length !== i+1 ? ',' : ''))
     })
     codes.push('}' + (length !== i+1 ? ',' : ''))
