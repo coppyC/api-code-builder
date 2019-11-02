@@ -24,6 +24,10 @@ export default function (config: Config) {
     typingCodes.push(...Typing(config.definitions, config.version))
   const groups = Groups(config.paths)
   const codes: string[] = []
+  codes.push(
+    '// this file may be overwrite by api code builder, don\'t change it. Go to api.config.json to config output file',
+    '// 本文件可能会被 api code builder 重写覆盖，请勿修改它。配置 api.config.json 来修改生成文件'
+  )
   codes.push(`import axios from '${config.axiosFrom || 'axios'}'`, '')
   if(config.baseURL) codes.push(`axios.defaults.baseURL = '${config.baseURL}'`, '')
   codes.push('export default {')

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`black box 1`] = `
-"import axios from 'axios'
+"// this file may be overwrite by api code builder, don't change it. Go to api.config.json to config output file
+// 本文件可能会被 api code builder 重写覆盖，请勿修改它。配置 api.config.json 来修改生成文件
+import axios from 'axios'
 
 axios.defaults.baseURL = '/xxx'
 
