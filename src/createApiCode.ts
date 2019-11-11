@@ -26,9 +26,11 @@ export default function (config: Config) {
   const codes: string[] = []
   codes.push(
     '// this file may be overwrite by api code builder, don\'t change it. Go to api.config.json to config output file',
-    '// 本文件可能会被 api code builder 重写覆盖，请勿修改它。配置 api.config.json 来修改生成文件'
+    '// 本文件可能会被 api code builder 重写覆盖，请勿修改它。配置 api.config.json 来修改生成文件',
+    '/* eslint-disable */',
   )
   codes.push(`import axios from '${config.axiosFrom || 'axios'}'`, '')
+  if (config.version === 'ts') codes.push('import { AxiosRequestConfig } from \'axios\'')
   if(config.baseURL) codes.push(`axios.defaults.baseURL = '${config.baseURL}'`, '')
   codes.push('export default {')
   Object.entries(groups).forEach(([groupName, group], i, {length}) => {
@@ -49,7 +51,11 @@ export default function (config: Config) {
           config.version
         ))
       })
-      const paramString = ParameterGroup.string(parameterGroup, baseTypeName, config.version)
+      const AXIOS_CONFIG_NAME = 'axiosConfig'
+      const paramString = [
+        ParameterGroup.string(parameterGroup, baseTypeName, config.version),
+        config.version === 'ts' ? `${AXIOS_CONFIG_NAME}?: AxiosRequestConfig` : AXIOS_CONFIG_NAME
+      ].filter(x => x).join(', ')
       let responseType = DataType(ctx.responses['200'].schema)
       if (config.customResponse) responseType = `Promise<${config.customResponse.replace('RESPONSE', responseType)}>`
       else responseType = `AxiosPromise<${responseType}>`
@@ -59,7 +65,7 @@ export default function (config: Config) {
       codes.push(`const method = '${ctx.method}'`)
       const axiosConfig = ParameterGroup.axiosConfig(parameterGroup)
       if(parameterGroup.formData) codes.push(...formdataCode())
-      codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig} })` + (config.customResponse ? ' as any' : ''))
+      codes.push(`return axios(${urlResolve(ctx.path)}, { ${axiosConfig}, ...${AXIOS_CONFIG_NAME} })` + (config.customResponse ? ' as any' : ''))
       codes.push('}' + (length !== i+1 ? ',' : ''))
     })
     codes.push('}' + (length !== i+1 ? ',' : ''))

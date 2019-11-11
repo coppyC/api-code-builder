@@ -3,8 +3,10 @@
 exports[`black box 1`] = `
 "// this file may be overwrite by api code builder, don't change it. Go to api.config.json to config output file
 // 本文件可能会被 api code builder 重写覆盖，请勿修改它。配置 api.config.json 来修改生成文件
+/* eslint-disable */
 import axios from 'axios'
 
+import { AxiosRequestConfig } from 'axios'
 axios.defaults.baseURL = '/xxx'
 
 export default {
@@ -13,54 +15,54 @@ export default {
      * 登录
      * @explain 开发环境初始账号密码：         xxxx         xxxx
      */
-    postLogin(params: AdminPostLoginParams): Promise<any['data']> {
+    postLogin(params: AdminPostLoginParams, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/login', { method, params }) as any
+      return axios('/admin/login', { method, params, ...axiosConfig }) as any
     },
     /** 封禁/解封门店 */
-    postShopBanShop(data: ShopBanQo): Promise<object['data']> {
+    postShopBanShop(data: ShopBanQo, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/shop/banShop', { method, data }) as any
+      return axios('/admin/shop/banShop', { method, data, ...axiosConfig }) as any
     },
     /** 审核门店 */
-    postShopCheckShop(data: ShopCheckQo): Promise<object['data']> {
+    postShopCheckShop(data: ShopCheckQo, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/shop/checkShop', { method, data }) as any
+      return axios('/admin/shop/checkShop', { method, data, ...axiosConfig }) as any
     },
     /** 审核门店资料更新 */
-    postShopCheckShopUpdate(data: ShopUpdateCheckQo): Promise<object['data']> {
+    postShopCheckShopUpdate(data: ShopUpdateCheckQo, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/shop/checkShopUpdate', { method, data }) as any
+      return axios('/admin/shop/checkShopUpdate', { method, data, ...axiosConfig }) as any
     },
     /** 删除服务 */
-    deleteShopDeleteService(params: AdminDeleteShopDeleteServiceParams): Promise<object['data']> {
+    deleteShopDeleteService(params: AdminDeleteShopDeleteServiceParams, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'delete'
-      return axios('/admin/shop/deleteService', { method, params }) as any
+      return axios('/admin/shop/deleteService', { method, params, ...axiosConfig }) as any
     },
     /** 删除服务分类 */
-    deleteShopDeleteServiceCategory(params: AdminDeleteShopDeleteServiceCategoryParams): Promise<object['data']> {
+    deleteShopDeleteServiceCategory(params: AdminDeleteShopDeleteServiceCategoryParams, axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'delete'
-      return axios('/admin/shop/deleteServiceCategory', { method, params }) as any
+      return axios('/admin/shop/deleteServiceCategory', { method, params, ...axiosConfig }) as any
     },
     /** 设置服务 */
-    postShopSaveService(data: ServiceQo[]): Promise<object['data']> {
+    postShopSaveService(data: ServiceQo[], axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/shop/saveService', { method, data }) as any
+      return axios('/admin/shop/saveService', { method, data, ...axiosConfig }) as any
     },
     /** 设置服务分类 */
-    postShopSaveServiceCategory(data: ServiceCategoryQo[]): Promise<object['data']> {
+    postShopSaveServiceCategory(data: ServiceCategoryQo[], axiosConfig?: AxiosRequestConfig): Promise<any['data']> {
       const method = 'post'
-      return axios('/admin/shop/saveServiceCategory', { method, data }) as any
+      return axios('/admin/shop/saveServiceCategory', { method, data, ...axiosConfig }) as any
     },
     /** 门店列表(包括审核列表) */
-    getShopShopList(params: AdminGetShopShopListParams): Promise<CommResultPageVoMerchantBossVo['data']> {
+    getShopShopList(params: AdminGetShopShopListParams, axiosConfig?: AxiosRequestConfig): Promise<CommResultPageVoMerchantBossVo['data']> {
       const method = 'get'
-      return axios('/admin/shop/shopList', { method, params }) as any
+      return axios('/admin/shop/shopList', { method, params, ...axiosConfig }) as any
     },
     /** 申请更新资料门店列表 */
-    getShopShopUpdateList(params: AdminGetShopShopUpdateListParams): Promise<CommResultPageVoShopUpdateVo['data']> {
+    getShopShopUpdateList(params: AdminGetShopShopUpdateListParams, axiosConfig?: AxiosRequestConfig): Promise<CommResultPageVoShopUpdateVo['data']> {
       const method = 'get'
-      return axios('/admin/shop/shopUpdateList', { method, params }) as any
+      return axios('/admin/shop/shopUpdateList', { method, params, ...axiosConfig }) as any
     }
   }
 }

@@ -21,5 +21,7 @@ export default function DataType(property?: Swagger.Schema): string {
           ? 'number'
           : property.type === 'file'
             ? 'any'
+            : property.type === 'object'
+            ? 'any'
             : property.type || 'any'
 }
