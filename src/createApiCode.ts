@@ -33,6 +33,10 @@ export default function (config: Config) {
   if (config.version === 'ts') codes.push('import { AxiosRequestConfig } from \'axios\'')
   if(config.baseURL && !config.axiosFrom)
     codes.push(`axios.defaults.baseURL = '${config.baseURL}'`, '')
+  codes.push(
+    'if (!axios.defaults.baseURL)',
+    `  axios.defaults.baseURL = '${config.baseURL}'\n`,
+  )
   codes.push('export default {')
   Object.entries(groups).forEach(([groupName, group], i, {length}) => {
     codes.push(`${groupName}: {`)

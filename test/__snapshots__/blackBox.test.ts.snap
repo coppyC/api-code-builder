@@ -9,6 +9,9 @@ import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 axios.defaults.baseURL = '/xxx'
 
+if (!axios.defaults.baseURL)
+  axios.defaults.baseURL = '/xxx'
+
 export default {
   admin: {
     /**
