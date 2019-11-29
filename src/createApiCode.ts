@@ -30,7 +30,7 @@ export default function (config: Config) {
     '/* eslint-disable */',
   )
   codes.push(`import axios from '${config.axiosFrom || 'axios'}'`, '')
-  if (config.version === 'ts') codes.push('import { AxiosRequestConfig } from \'axios\'')
+  if (config.version === 'ts') codes.push('import { AxiosRequestConfig, AxiosPromise } from \'axios\'')
   if(config.baseURL && !config.axiosFrom)
     codes.push(`axios.defaults.baseURL = '${config.baseURL}'`, '')
   codes.push(
