@@ -7,10 +7,10 @@ const request = require('./request')
 const saveFile = require('./saveFile')
 const apiCodeBuilder = require('../dist/main')
 
-async function fetchDocument(url) {
+async function fetchDocument(url, author) {
   const startTime = Date.now()
   console.log(`fetch document ${decodeURIComponent(url)} ...`)
-  const document = await request(url)
+  const document = await request(url, author)
   const endTime = Date.now()
   console.log(`fetch ${decodeURIComponent(url)} complete (${((endTime - startTime)/1000).toFixed(1)}.s)`)
   const throwUrlError = () => {
@@ -46,7 +46,10 @@ async function run () {
     config.swaggerURL = [config.swaggerURL]
   const documents = await Promise.all(
     Array.from(config.swaggerURL).map(url => (
-      fetchDocument(url)
+      fetchDocument(url, config.basicAuthor ? {
+        username: config.username,
+        password: config.password,
+      } : undefined)
     ))
   )
 

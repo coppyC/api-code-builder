@@ -16,6 +16,24 @@ module.exports = function () {
         },
       },
       {
+        message: 'need basic authorization?',
+        name: 'basicAuthor',
+        type: 'confirm',
+        default: false,
+      },
+      {
+        message: 'username:',
+        name: 'username',
+        when(answers) { return answers.basicAuthor },
+        type: 'input',
+      },
+      {
+        message: 'password:',
+        name: 'password',
+        when(answers) { return answers.basicAuthor },
+        type: 'password',
+      },
+      {
         message: 'choose documents',
         name: 'group',
         type: 'checkbox',

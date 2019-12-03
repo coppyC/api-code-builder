@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true
   },
-  "exclude": [
-    "test"
+  "include": [
+    "src"
   ]
 }
