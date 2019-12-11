@@ -6,7 +6,7 @@ exports[`black box 1`] = `
 /* eslint-disable */
 import axios from 'axios'
 
-import { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig, AxiosPromise } from 'axios'
 axios.defaults.baseURL = '/xxx'
 
 if (!axios.defaults.baseURL)
