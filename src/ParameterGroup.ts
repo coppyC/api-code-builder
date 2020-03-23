@@ -92,9 +92,10 @@ export function TypingfromParameters(typeName: string, parameters: Parameter[], 
   }
   return [
     `export interface ${typeName} {`,
-    ...parameters.map(parameter => (
-      `${parameter.name}${required(parameter.required)}: ${ParameterDataType(parameter)}`
-    )),
+    ...parameters.map(parameter => {
+      const key = /^\w+$/.test(parameter.name) ? parameter.name : `"${parameter.name}"`
+      return `${key}${required(parameter.required)}: ${ParameterDataType(parameter)}`
+    }),
     '}'
   ]
 }
