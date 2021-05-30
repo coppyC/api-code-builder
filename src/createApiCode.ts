@@ -61,11 +61,16 @@ export default function (config: Config) {
         ParameterGroup.string(parameterGroup, baseTypeName, config.version),
         config.version === 'ts' ? `${AXIOS_CONFIG_NAME}?: AxiosRequestConfig` : AXIOS_CONFIG_NAME
       ].filter(x => x).join(', ')
-      let responseType = DataType(ctx.responses['200'].schema)
-      if (config.customResponse) responseType = `Promise<${config.customResponse.replace('RESPONSE', responseType)}>`
-      else responseType = `AxiosPromise<${responseType}>`
-      if (config.version === 'ts') responseType = `: ${responseType}`
-      else responseType = ''
+      let responseType: string
+      if (!ctx.responses || !ctx.responses['200']) {
+        responseType = 'void'
+      } else {
+        responseType = DataType(ctx.responses['200'].schema)
+        if (config.customResponse) responseType = `Promise<${config.customResponse.replace('RESPONSE', responseType)}>`
+        else responseType = `AxiosPromise<${responseType}>`
+        if (config.version === 'ts') responseType = `: ${responseType}`
+        else responseType = ''
+      }
       codes.push(`${apiName}(${paramString})${responseType} {`)
       codes.push(`const method = '${ctx.method}'`)
       const axiosConfig = ParameterGroup.axiosConfig(parameterGroup)
