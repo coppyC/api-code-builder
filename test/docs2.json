@@ -1,0 +1,1414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "test2",
+    "description": "test2",
+    "termsOfService": "https://www.google.com/policies/terms/",
+    "contact": {
+      "email": "feedback@deali.cn"
+    },
+    "license": {
+      "name": "BSD License"
+    },
+    "version": "v1"
+  },
+  "host": "localhost:8080",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "Basic": []
+    }
+  ],
+  "paths": {
+    "/api-token-auth/": {
+      "post": {
+        "operationId": "api-token-auth_create",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "api-token-auth"
+        ]
+      },
+      "parameters": []
+    },
+    "/article/article/": {
+      "get": {
+        "operationId": "article_article_list",
+        "summary": "\u83b7\u53d6\u6240\u6709\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Article"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "post": {
+        "operationId": "article_article_create",
+        "summary": "\u6dfb\u52a0\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "parameters": []
+    },
+    "/article/article/{id}/": {
+      "get": {
+        "operationId": "article_article_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "put": {
+        "operationId": "article_article_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "patch": {
+        "operationId": "article_article_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "delete": {
+        "operationId": "article_article_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u6587\u7ae0\u8d44\u6599",
+        "description": "\u6587\u7ae0\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "article"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u6587\u7ae0.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/banner/banner/": {
+      "get": {
+        "operationId": "banner_banner_list",
+        "summary": "\u83b7\u53d6\u6240\u6709\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Banner"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "post": {
+        "operationId": "banner_banner_create",
+        "summary": "\u6dfb\u52a0\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "parameters": []
+    },
+    "/banner/banner/{id}/": {
+      "get": {
+        "operationId": "banner_banner_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "put": {
+        "operationId": "banner_banner_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "patch": {
+        "operationId": "banner_banner_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Banner"
+            }
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "delete": {
+        "operationId": "banner_banner_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u8f6e\u64ad\u56fe\u8d44\u6599",
+        "description": "\u8f6e\u64ad\u56fe\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "banner"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u8f6e\u64ad\u56fe.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/chapter/chapter/": {
+      "get": {
+        "operationId": "chapter_chapter_list",
+        "summary": "\u83b7\u53d6\u6240\u6709\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Chapter"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "post": {
+        "operationId": "chapter_chapter_create",
+        "summary": "\u6dfb\u52a0\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "parameters": []
+    },
+    "/chapter/chapter/{id}/": {
+      "get": {
+        "operationId": "chapter_chapter_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "put": {
+        "operationId": "chapter_chapter_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "patch": {
+        "operationId": "chapter_chapter_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Chapter"
+            }
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "delete": {
+        "operationId": "chapter_chapter_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u677f\u5757\u8d44\u6599",
+        "description": "\u677f\u5757\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "chapter"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u677f\u5757.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/user_profile/": {
+      "get": {
+        "operationId": "\u83b7\u53d6\u6240\u6709\u7528\u6237\u8d44\u6599",
+        "summary": "\u83b7\u53d6\u6240\u6709\u7528\u6237\u8d44\u6599",
+        "description": "\u83b7\u53d6\u6240\u6709\u7528\u6237\u8d44\u6599",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/UserProfile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "post": {
+        "operationId": "core_user_profile_create",
+        "summary": "\u6dfb\u52a0\u7528\u6237\u8d44\u6599",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/user_profile/sign_up/": {
+      "post": {
+        "operationId": "core_user_profile_sign_up",
+        "summary": "\u767b\u5f55\u6216\u6ce8\u518c",
+        "description": "\u767b\u5f55\u6216\u6ce8\u518c\u529f\u80fd, \u5982\u679c\u7528\u6237\u540d\u548c\u5bc6\u7801\u5b58\u5728\u5219\u767b\u5f55, \u53cd\u4e4b\u5219\u521b\u5efa\u65b0\u7528\u6237, \u4e24\u79cd\u64cd\u4f5c\u90fd\u4f1a\u8fd4\u56de\u4e00\u4e2atoken",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": [
+                "username",
+                "password"
+              ],
+              "type": "object",
+              "properties": {
+                "username": {
+                  "description": "\u7528\u6237\u540d(\u6216\u624b\u673a\u53f7)",
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/user_profile/{id}/": {
+      "get": {
+        "operationId": "core_user_profile_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u7528\u6237\u8d44\u6599",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "put": {
+        "operationId": "core_user_profile_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u7528\u6237\u8d44\u6599",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "patch": {
+        "operationId": "core_user_profile_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u7528\u6237\u8d44\u6599",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserProfile"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "delete": {
+        "operationId": "core_user_profile_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u7528\u6237\u8d44\u6599",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u7528\u6237\u8d44\u6599.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/dial/dial/": {
+      "get": {
+        "operationId": "dial_dial_list",
+        "summary": "\u83b7\u53d6\u6240\u6709\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Dial"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "post": {
+        "operationId": "dial_dial_create",
+        "summary": "\u6dfb\u52a0\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "parameters": []
+    },
+    "/dial/dial/{id}/": {
+      "get": {
+        "operationId": "dial_dial_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "put": {
+        "operationId": "dial_dial_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "patch": {
+        "operationId": "dial_dial_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Dial"
+            }
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "delete": {
+        "operationId": "dial_dial_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u5bab\u683c\u8d44\u6599",
+        "description": "\u5bab\u683c\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "dial"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u5bab\u683c.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/oauth/wechat_work/authorize_redirect_uri/": {
+      "get": {
+        "operationId": "oauth_wechat_work_authorize_redirect_uri",
+        "summary": "\u5fae\u4fe1\u4f01\u4e1a\u53f7\u767b\u5f55\u56de\u8c03",
+        "description": "\u5fae\u4fe1\u4f01\u4e1a\u53f7\u76f8\u5173\u8ba4\u8bc1\u670d\u52a1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "oauth"
+        ]
+      },
+      "parameters": []
+    },
+    "/oauth/wechat_work/get_authorize_url/": {
+      "get": {
+        "operationId": "oauth_wechat_work_get_authorize_url",
+        "summary": "\u83b7\u53d6\u5fae\u4fe1\u4f01\u4e1a\u53f7\u767b\u5f55\u94fe\u63a5",
+        "description": "\u5fae\u4fe1\u4f01\u4e1a\u53f7\u76f8\u5173\u8ba4\u8bc1\u670d\u52a1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "oauth"
+        ]
+      },
+      "parameters": []
+    },
+    "/oauth/wechat_work/login_by_code/": {
+      "get": {
+        "operationId": "oauth_wechat_work_login_by_code",
+        "summary": "\u901a\u8fc7code\u767b\u5f55",
+        "description": "\u5fae\u4fe1\u4f01\u4e1a\u53f7\u76f8\u5173\u8ba4\u8bc1\u670d\u52a1",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "\u4ece\u5fae\u4fe1\u4f01\u4e1a\u53f7\u670d\u52a1\u5668\u83b7\u53d6\u5230\u7684code",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "oauth"
+        ]
+      },
+      "parameters": []
+    },
+    "/section/section/": {
+      "get": {
+        "operationId": "section_section_list",
+        "summary": "\u83b7\u53d6\u6240\u6709\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Section"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "post": {
+        "operationId": "section_section_create",
+        "summary": "\u6dfb\u52a0\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "parameters": []
+    },
+    "/section/section/{id}/": {
+      "get": {
+        "operationId": "section_section_read",
+        "summary": "\u83b7\u53d6\u6307\u5b9a\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "put": {
+        "operationId": "section_section_update",
+        "summary": "\u4fee\u6539\u6307\u5b9a\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "patch": {
+        "operationId": "section_section_partial_update",
+        "summary": "\u90e8\u5206\u4fee\u6539\u6307\u5b9a\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Section"
+            }
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "delete": {
+        "operationId": "section_section_delete",
+        "summary": "\u5220\u9664\u6307\u5b9a\u6587\u7ae0\u5206\u7c7b\u8d44\u6599",
+        "description": "\u6587\u7ae0\u5206\u7c7b\u76f8\u5173\u64cd\u4f5c",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "section"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this \u6587\u7ae0\u5206\u7c7b.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Article": {
+      "description": "Article(id, title, update_time, publish_time, content)",
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "\u6807\u9898",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "update_time": {
+          "title": "\u7f16\u8f91\u66f4\u65b0\u65f6\u95f4",
+          "type": "string",
+          "format": "date-time"
+        },
+        "publish_time": {
+          "title": "\u53d1\u5e03\u65f6\u95f4",
+          "type": "string",
+          "format": "date-time"
+        },
+        "content": {
+          "title": "\u6587\u7ae0\u5185\u5bb9",
+          "type": "string"
+        }
+      }
+    },
+    "Banner": {
+      "description": "Banner(id, title, image)",
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "title": "\u6807\u9898",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "image": {
+          "title": "\u56fe\u7247",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        }
+      }
+    },
+    "Chapter": {
+      "description": "Chapter(id, name)",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "\u540d\u79f0",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "secions": {
+          "type": "array",
+          "items": {
+            "title": "\u677f\u5757\u4e0b\u7684\u5206\u7c7b",
+            "type": "integer"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "UserProfile": {
+      "description": "\u7528\u6237\u8d44\u6599",
+      "required": [
+        "user"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "phone": {
+          "title": "\u624b\u673a\u53f7",
+          "type": "string",
+          "maxLength": 11,
+          "x-nullable": true
+        },
+        "user": {
+          "title": "User",
+          "type": "integer"
+        }
+      }
+    },
+    "Dial": {
+      "description": "Dial(id, name, icon, sort, type, article, chapter)",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "\u540d\u79f0",
+          "type": "string",
+          "maxLength": 20,
+          "minLength": 1
+        },
+        "icon": {
+          "title": "\u56fe\u6807",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        },
+        "sort": {
+          "title": "\u663e\u793a\u987a\u5e8f",
+          "description": "\u8d8a\u5927\u6392\u8d8a\u540e\u9762",
+          "type": "integer"
+        },
+        "type": {
+          "title": "\u5bab\u683c\u7c7b\u578b",
+          "type": "string",
+          "enum": [
+            "none",
+            "chapter",
+            "article"
+          ]
+        },
+        "article": {
+          "title": "Article",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "chapter": {
+          "title": "Chapter",
+          "type": "integer",
+          "x-nullable": true
+        }
+      }
+    },
+    "Section": {
+      "description": "Section(id, name)",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "\u540d\u79f0",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "articles": {
+          "type": "array",
+          "items": {
+            "title": "\u5206\u7c7b\u4e0b\u7684\u6587\u7ae0",
+            "type": "integer"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "article",
+      "description": "\u6587\u7ae0"
+    },
+    {
+      "name": "banner",
+      "description": "\u8f6e\u64ad\u56fe"
+    },
+    {
+      "name": "chapter",
+      "description": "\u677f\u5757"
+    },
+    {
+      "name": "section",
+      "description": "\u677f\u5757\u4e0b\u5206\u7c7b"
+    },
+    {
+      "name": "core",
+      "description": "\u6838\u5fc3\u529f\u80fd"
+    },
+    {
+      "name": "dial",
+      "description": "\u9996\u9875\u5bab\u683c"
+    },
+    {
+      "name": "oauth",
+      "description": "\u7b2c\u4e09\u65b9\u767b\u5f55"
+    }
+  ]
+}

@@ -63,7 +63,7 @@ export default function (config: Config) {
       ].filter(x => x).join(', ')
       let responseType: string
       if (!ctx.responses || !ctx.responses['200']) {
-        responseType = 'void'
+        responseType = ''
       } else {
         responseType = DataType(ctx.responses['200'].schema)
         if (config.customResponse) responseType = `Promise<${config.customResponse.replace('RESPONSE', responseType)}>`
